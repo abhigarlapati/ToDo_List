@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task List</h1>
+           <form action="/logout" method="GET">
+        <button type="submit">LogOut</button>
+    </form>
+    
+   <table>
+    <thead>
+        <tr>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="task : ${tasks}">
+        
+            <td th:text="${task.taskdata}"></td>
+            
+     
+            <td>
+                <span th:if="${task.status}">Completed</span>
+                <span th:unless="${task.status}">Not Completed</span>
+            </td>
+            <td>
+                <form th:action="@{/deleteTask}" method="get" style="display:inline;">
+                    <input type="hidden" name="taskId" th:value="${task.id}">
+                    <button type="submit">Delete</button>
+                </form>
+                
+                 <form th:action="@{/updateTask}" method="get">
+                        <input type="hidden" name="taskId" th:value="${task.id}">
+                        <button type="submit">Update</button>
+                    </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
