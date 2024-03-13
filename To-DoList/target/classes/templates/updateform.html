@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center content horizontally */
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        form {
+            margin-top: 20px;
+            text-align: left; /* Reset text alignment for form elements */
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="checkbox"] {
+            width: calc(100% - 22px); /* Adjust width for the checkbox */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            vertical-align: middle; /* Align checkbox vertically */
+        }
+        input[type="checkbox"] {
+            transform: scale(1.5); /* Increase checkbox size */
+        }
+        button[type="submit"] {
+            display: block; /* Make button a block-level element */
+            margin: 0 auto; /* Center button horizontally */
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update Task</h1>
+        <form th:action="@{/updateTask}" method="post">
+            <input type="hidden" name="id" th:value="${task.id}">
+            <label for="taskData">Task Data:</label>
+            <input type="text" id="taskData" name="taskdata" th:value="${task.taskdata}">
+            <br>
+            <label for="deadline">Deadline:</label>
+            <input type="datetime-local" id="deadline" name="deadline" th:value="${task.deadline}">
+            <br>
+            <br>
+            <label for="status">Status:</label>
+            <input type="checkbox" id="status" name="status" th:checked="${task.status}">
+            <br>
+            <p>Please select the checkbox if you have completed the task.</p> <!-- Message added -->
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>
